@@ -42,8 +42,8 @@ class ImageContainer extends StatelessWidget {
               ? CachedNetworkImage(
                   imageUrl: imagePath!,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => Loading(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  placeholder: (context, url) => const Loading(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 )
               : Image.file(
                   File(imagePath!),

@@ -3,15 +3,26 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:time_craft_control/view/core/styles.dart';
 
 class OrderTile extends StatelessWidget {
-  const OrderTile({super.key, required this.trailing});
+  const OrderTile({
+    super.key,
+    required this.trailing,
+    required this.imagePath,
+    required this.name,
+    required this.totalPrice,
+    this.varient,
+    this.orderNo,
+  });
   final Widget trailing;
-
+  final String imagePath;
+  final String name;
+  final String? orderNo;
+  final int totalPrice;
+  final String? varient;
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          border: Border.all(),
-          borderRadius: BorderRadius.circular(kwidth * 0.03)),
+      decoration:
+          BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(kwidth * 0.03)),
       height: khieght * 0.15,
       child: Center(
         child: SizedBox(
@@ -20,9 +31,9 @@ class OrderTile extends StatelessWidget {
           child: Row(
             children: [
               Image.network(
-                imgpath,
+                imagePath,
                 width: khieght * 0.125,
-                fit: BoxFit.cover,
+                fit: BoxFit.fitHeight,
               ),
               SizedBox(
                 width: kwidth * 0.03,
@@ -32,10 +43,9 @@ class OrderTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    text16interbold('Titan watch'),
-                    text12inter('Order 0000001'),
-                    text12inter('Quantity = 1'),
-                    text16interbold('₹799'),
+                    text16interbold(name),
+                    text12inter(orderNo != null ? 'Order: $orderNo' : 'varient:$varient'),
+                    text16interbold('₹$totalPrice'),
                   ],
                 ),
               ),

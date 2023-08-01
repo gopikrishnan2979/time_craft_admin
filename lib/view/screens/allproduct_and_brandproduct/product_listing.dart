@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:time_craft_control/model/argument_models/product_argument_model.dart';
+import 'package:time_craft_control/model/argument_models/product_arg.dart';
 import 'package:time_craft_control/view/common/widgets/appbar.dart';
 import 'package:time_craft_control/view/common/widgets/item_card.dart';
 import 'package:time_craft_control/view/common/widgets/loading.dart';

@@ -1,15 +1,12 @@
 import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:time_craft_control/model/firebase_instance_model.dart';
 import 'package:time_craft_control/view/common/widgets/loading.dart';
 
 class BannerService {
-  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
-  //---------------------image storage folder name---------------------------
+  //---------------------collection name---------------------------
 
   static const String collectionName = 'banners';
 
@@ -21,9 +18,9 @@ class BannerService {
       File imageFile = File(imagepath);
       String fileName = imageFile.path.split('/').last;
       var snapshot =
-          await _firebaseStorage.ref().child('images/$collectionName/$fileName').putFile(imageFile);
+          await FirebaseInstanceModel.firebaseStorage.ref().child('images/$collectionName/$fileName').putFile(imageFile);
       String downloadUrl = await snapshot.ref.getDownloadURL();
-      await _firebaseFirestore
+      await FirebaseInstanceModel.firestore
           .collection(collectionName)
           .doc()
           .set({'image': downloadUrl}).then((value) {
@@ -69,5 +66,12 @@ class BannerService {
       barrierDismissible: false,
       builder: (context) => const Loading(),
     );
+  }
+
+  bannerDeleting (String bannerRef){
+    FirebaseStorage.instance
+                                  .refFromURL(bannerRef)
+                                  .delete();
+                             
   }
 }

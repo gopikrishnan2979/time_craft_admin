@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_craft_control/controller/product/add_product_image_controller/product_image_controller.dart';
 import 'package:time_craft_control/controller/product/color_adding_controller/color_varient_adding_controller.dart';
-import 'package:time_craft_control/controller/product/dropdown_controller/dropdown_controller.dart';
+import 'package:time_craft_control/controller/dropdown_controller.dart';
 import 'package:time_craft_control/model/product_model.dart';
 import 'package:time_craft_control/services/firebase/product_adding.dart';
 import 'package:time_craft_control/services/validator/validator_product.dart';
@@ -17,7 +17,7 @@ import 'package:time_craft_control/view/screens/product/add_product/widgets/text
 import 'package:time_craft_control/view/screens/product/add_product/widgets/varients/varient_part.dart';
 
 class AddProduct extends StatefulWidget {
-  AddProduct({super.key});
+  const AddProduct({super.key});
 
   static const String routename = '/Addproduct';
 

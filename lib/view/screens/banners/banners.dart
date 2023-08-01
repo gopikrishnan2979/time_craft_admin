@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:time_craft_control/controller/banner/banner_adding_controller.dart';
 import 'package:time_craft_control/services/firebase/banner_adding.dart';
@@ -48,21 +48,15 @@ class Banners extends StatelessWidget {
                         Positioned(
                           right: 0,
                           child: IconButton(
-                            icon: const Icon(
-                              Icons.delete,
-                            ),
+                            icon: const Icon(Icons.delete),
                             color: black,
                             style: const ButtonStyle(
                                 backgroundColor:
                                     MaterialStatePropertyAll(Color.fromARGB(196, 255, 255, 255))),
-                            onPressed: () async {
-                              FirebaseStorage.instance
-                                  .refFromURL(snapshot.data!.docs[index]['image'])
-                                  .delete();
-                              await FirebaseFirestore.instance.runTransaction(
-                                (Transaction myTransaction) async {
-                                  myTransaction.delete(snapshot.data!.docs[index].reference);
-                                },
+                            onPressed: () {
+                              deleteConfirmationAlert(
+                                context: context,
+                                bannerUrl: snapshot.data!.docs[index]['image'],
                               );
                             },
                           ),
@@ -80,26 +74,67 @@ class Banners extends StatelessWidget {
               if (size < 5) {
                 Navigator.of(context).pushNamed(AddBanner.routename);
               } else {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('Alert'),
-                    content: const Text('Maximum limit is 5'),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  ),
-                );
+                itemCountExceedAlert(context);
               }
             },
             child: const Icon(Icons.add),
           ),
         ),
+      ),
+    );
+  }
+
+  itemCountExceedAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Alert'),
+        content: const Text('Maximum limit is 5'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  deleteConfirmationAlert({required BuildContext context, required String bannerUrl}) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Row(
+          children: [
+            const Icon(Icons.warning_amber_rounded, color: Colors.red),
+            Text(
+              'Delete',
+              style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        content: const Text('Are you sure, Delete this item'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Cancel', style: interbold),
+          ),
+          TextButton(
+            onPressed: () {
+              BannerService().bannerDeleting(bannerUrl);
+
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              'Delete',
+              style: GoogleFonts.inter(color: Colors.red, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
       ),
     );
   }

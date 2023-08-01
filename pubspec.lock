@@ -432,6 +432,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  order_tracker_zen:
+    dependency: "direct main"
+    description:
+      name: order_tracker_zen
+      sha256: a91ce3aa32cd2f2a0879d11ad67d97798cb253e856627801fc36189d5b7e6909
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+4"
   path:
     dependency: transitive
     description:

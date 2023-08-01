@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:time_craft_control/controller/order_scrn_controller.dart';
 import 'package:time_craft_control/view/core/styles.dart';
 import 'package:time_craft_control/view/screens/orders_folders/widgets/active_screen/active_screen.dart';
 import 'package:time_craft_control/view/screens/orders_folders/widgets/appbar.dart';
@@ -11,14 +13,14 @@ class Orders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<OrderScrnController>(context, listen: false).getOrder();
     return const SafeArea(
       child: DefaultTabController(
         length: 2,
-        child: Scaffold(  
-          backgroundColor: white,
-            appBar:  AppbarOrders(),
-            body: TabBarView(
-                children: [ActiveTabBarView(), CompleteTabBarView()])),
+        child: Scaffold(
+            backgroundColor: white,
+            appBar: AppbarOrders(),
+            body: TabBarView(children: [ActiveTabBarView(), CompleteTabBarView()])),
       ),
     );
   }

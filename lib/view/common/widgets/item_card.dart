@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:time_craft_control/view/core/styles.dart';
+import 'package:time_craft_control/view/screens/brands/all_brands/all_brands.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard(
@@ -9,7 +10,9 @@ class ItemCard extends StatelessWidget {
       required this.imagepath,
       required this.smalldiscription,
       required this.discount,
+      required this.productId,
       required this.price});
+  final String productId;
   final String name;
   final String smalldiscription;
   final String imagepath;
@@ -26,40 +29,62 @@ class ItemCard extends StatelessWidget {
           color: const Color.fromARGB(255, 200, 200, 200),
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          Image.network(width: kwidth * 0.5, height: khieght * 0.2, fit: BoxFit.cover, imagepath),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(name,
-                      style: GoogleFonts.inter(
-                        fontSize: 16,
-                      )),
-                  Text(smalldiscription,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.inter(
-                        fontSize: 12,
-                      )),
-                  Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.network(
+                width: kwidth * 0.5,
+                height: khieght * 0.2,
+                fit: BoxFit.fitHeight,
+                imagepath,
+                errorBuilder: (context, error, stackTrace) =>
+                    SizedBox(width: kwidth * 0.5, height: khieght * 0.2),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        '$discount% OFF',
-                        style: GoogleFonts.inter(color: Colors.green),
+                      Text(name, style: GoogleFonts.inter(fontSize: 16)),
+                      Text(smalldiscription,
+                          overflow: TextOverflow.ellipsis, style: GoogleFonts.inter(fontSize: 12)),
+                      Row(
+                        children: [
+                          Text('$discount% OFF', style: GoogleFonts.inter(color: Colors.green)),
+                          const SizedBox(width: 30),
+                          Text('₹$price')
+                        ],
                       ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      Text('₹$price')
+                      Text('Delivery in 5 days', style: GoogleFonts.inter(fontSize: 10)),
                     ],
                   ),
-                  Text('Delivery in 5 days', style: GoogleFonts.inter(fontSize: 10)),
-                ],
-              ),
+                ),
+              )
+            ],
+          ),
+          Positioned(
+            right: 0,
+            child: PopupMenuButton(
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: 0,
+                  child: Row(
+                    children: [
+                      Icon(Icons.delete),
+                      Text('Delete'),
+                    ],
+                  ),
+                )
+              ],
+              onSelected: (value) {
+                showDialog(
+                  context: context,
+                  builder: (_) => delete(context: context, id: productId, isfromProduct: true),
+                );
+              },
             ),
           )
         ],

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:time_craft_control/controller/order_scrn_controller.dart';
 import 'package:time_craft_control/model/firebase_instance_model.dart';
 import 'package:time_craft_control/view/common/widgets/loading.dart';
 
@@ -24,23 +26,11 @@ class OrderService {
             .doc(orderId)
             .update({key: date, 'orderStatus': currentStatus}).then((value) {
           Navigator.of(context).pop();
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: Text('Successfully updated'),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('Ok'))
-              ],
-            ),
-          );
+          Provider.of<OrderScrnController>(context, listen: false).getOrder();
         });
       } else {
         if (context.mounted) {
-          alertshower(context: context, e: 'Setted earlier, Can be set only once');
+          alertshower(context: context, e: 'Setted earlier, Can be set only once', isSetted: true);
         }
       }
     } on FirebaseException catch (e) {
@@ -48,7 +38,7 @@ class OrderService {
     }
   }
 
-  alertshower({required BuildContext context, required String e}) {
+  alertshower({required BuildContext context, required String e, bool isSetted = false}) {
     showDialog(
       barrierDismissible: false,
       context: context,
@@ -59,6 +49,9 @@ class OrderService {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
+              if (isSetted) {
+                Navigator.of(context).pop();
+              }
             },
             child: const Text('OK'),
           ),

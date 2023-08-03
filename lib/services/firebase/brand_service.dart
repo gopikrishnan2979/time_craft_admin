@@ -1,28 +1,26 @@
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:time_craft_control/model/brand_model.dart';
+import 'package:time_craft_control/model/firebase_instance_model.dart';
 import 'package:time_craft_control/view/common/widgets/loading.dart';
 
 class BrandServices {
-  final FirebaseFirestore _firebase = FirebaseFirestore.instance;
-  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
   //---------------------brand image storage folder name---------------------------
   static String collectionName = 'brands';
 
   //----------------------Adding new brands to the collections------------------------
-  
+
   addToBrandCollection({required BrandModel brandModel, required BuildContext context}) async {
     try {
       loading(context);
-      TaskSnapshot snapshot = await _firebaseStorage
+      TaskSnapshot snapshot = await FirebaseInstanceModel.firebaseStorage
           .ref()
           .child('images/brands/${brandModel.name}')
           .putFile(File(brandModel.imagepath));
       String downloadUrl = await snapshot.ref.getDownloadURL();
-      await _firebase.collection(collectionName).doc().set({
+      await FirebaseInstanceModel.firestore.collection(collectionName).doc().set({
         'name': brandModel.name,
         'image': downloadUrl,
       }).then((value) {
@@ -36,6 +34,15 @@ class BrandServices {
     }
   }
 
+  removeFromBrand({required String brandId, required BuildContext context}) async {
+    try {
+      await FirebaseInstanceModel.brands.doc(brandId).delete().then((value) {
+        alertshower(message: 'Successfully deleted', context: context);
+      });
+    } on FirebaseException catch (e) {
+      alertshower(message: e.message ?? "Error", context: context);
+    }
+  }
 
   //--------------------------Alert showing popup for displaying messages---------------------------------
 
@@ -61,13 +68,12 @@ class BrandServices {
     );
   }
 
-
   //---------------------------Loading showing--------------------------
   loading(BuildContext context) {
     return showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) =>const Loading(),
+      builder: (context) => const Loading(),
     );
   }
 }

@@ -15,21 +15,11 @@ class ProductDeliveryAndDetails extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(
-              'FREE DELIVERY',
-              style:
-                  GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.green),
-            ),
-            const SizedBox(
-              height: 20,
-              child: VerticalDivider(
-                color: Colors.grey,
-              ),
-            ),
-            Text(
-              'Delivery in 5 days',
-              style: GoogleFonts.inter(fontWeight: FontWeight.bold),
-            ),
+            Text('FREE DELIVERY',
+                style: GoogleFonts.inter(
+                    fontSize: 14, fontWeight: FontWeight.bold, color: Colors.green)),
+            const SizedBox(height: 20, child: VerticalDivider(color: Colors.grey)),
+            Text('Delivery in 5 days', style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
           ],
         ),
         _titletext('Product Details'),
@@ -42,9 +32,7 @@ class ProductDeliveryAndDetails extends StatelessWidget {
                 _detailtext('Display Type', false),
               ],
             ),
-            SizedBox(
-              width: kwidth * 0.15,
-            ),
+            SizedBox(width: kwidth * 0.15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -61,20 +49,17 @@ class ProductDeliveryAndDetails extends StatelessWidget {
   Widget _titletext(String text) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       sizedboxwithheight(khieght * 0.01),
-      Text(
-        text,
-        style: inter,
-      )
+      Text(text, style: inter),
     ]);
   }
 
   Widget _detailtext(String text, bool isblack) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      sizedboxwithheight(khieght * 0.01),
-      Text(
-        text,
-        style: GoogleFonts.inter(fontSize: 12, color: isblack ? black : Colors.grey),
-      )
-    ]);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        sizedboxwithheight(khieght * 0.01),
+        Text(text, style: GoogleFonts.inter(fontSize: 12, color: isblack ? black : Colors.grey))
+      ],
+    );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_craft_control/controller/brand_image_provider/brand_image_provider.dart';
 import 'package:time_craft_control/model/brand_model.dart';
-import 'package:time_craft_control/services/firebase/brand_adding.dart';
+import 'package:time_craft_control/services/firebase/brand_service.dart';
 import 'package:time_craft_control/view/common/widgets/appbar.dart';
 import 'package:time_craft_control/view/core/styles.dart';
 import 'package:time_craft_control/view/screens/brands/add_brands/widgets/add_brand_textfield.dart';

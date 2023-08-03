@@ -5,7 +5,7 @@ import 'package:time_craft_control/controller/product/add_product_image_controll
 import 'package:time_craft_control/controller/product/color_adding_controller/color_varient_adding_controller.dart';
 import 'package:time_craft_control/controller/dropdown_controller.dart';
 import 'package:time_craft_control/model/product_model.dart';
-import 'package:time_craft_control/services/firebase/product_adding.dart';
+import 'package:time_craft_control/services/firebase/product_services.dart';
 import 'package:time_craft_control/services/validator/validator_product.dart';
 import 'package:time_craft_control/view/common/widgets/appbar.dart';
 import 'package:time_craft_control/view/core/styles.dart';
@@ -118,8 +118,9 @@ class _AddProductState extends State<AddProduct> {
                             DropdownController(item: brandlist, value: brandlist[0]),
                         child: Consumer<DropdownController>(
                             builder: (context, DropdownController controller, child) {
-                          _productdata.brand =
-                              controller.value == controller.item[0] ? '' :brandDocID[controller.value]??'';
+                          _productdata.brand = controller.value == controller.item[0]
+                              ? ''
+                              : brandDocID[controller.value] ?? '';
                           return DropDownProductAdd(
                             dropDownController: controller,
                           );
@@ -187,7 +188,7 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
-  Widget addproduct(BuildContext context) {
+  Widget addproduct(BuildContext context,) {
     return ElevatedButton(
       onPressed: () {
         _productdata.name = _nameController.text.trim();
@@ -197,7 +198,7 @@ class _AddProductState extends State<AddProduct> {
         _productdata.smalldiscription = _smallDiscriptionController.text.trim();
         Validation validation = Validation(product: _productdata, context: context);
         if (validation.validation()) {
-          ProductAddingFirestore().addToProductCollection(product: _productdata, context: context);
+          ProductServices().addToProductCollection(product: _productdata, context: context);
         }
       },
       style: ButtonStyle(

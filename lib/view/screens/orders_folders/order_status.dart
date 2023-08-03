@@ -55,21 +55,20 @@ class OrderStatus extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pushNamed(OrderDetails.routename, arguments: orderArg);
                     },
-                    child: Text(
-                      'DETAILS',
-                      style: interwhitebold,
-                    ),
+                    child: Text('DETAILS', style: interwhitebold),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(kwidth * 0.03),
                   child: OrderTrackerZen(
-                      tracker_data: tracker(
-                          status: orderData.orderStatus!,
-                          orderdate: orderData.orderPlacedDate,
-                          shippedDate: orderData.shippingDate,
-                          outForDeliveryDate: orderData.outForDeliveryDate,
-                          deliveryDate: orderData.deliveryDate)),
+                    tracker_data: tracker(
+                      status: orderData.orderStatus!,
+                      orderdate: orderData.orderPlacedDate,
+                      shippedDate: orderData.shippingDate,
+                      outForDeliveryDate: orderData.outForDeliveryDate,
+                      deliveryDate: orderData.deliveryDate,
+                    ),
+                  ),
                 )
               ],
             ),
@@ -80,11 +79,12 @@ class OrderStatus extends StatelessWidget {
             showDialog(
               context: context,
               builder: (_) => ChangeNotifierProvider(
-                  create: (_) => DropdownController(item: statusList, value: statusList[0]),
-                  child: StatusChangerPopup(
-                    orderID: orderArg.orderId,
-                    ctx: context,
-                  )),
+                create: (_) => DropdownController(item: statusList, value: statusList[0]),
+                child: StatusChangerPopup(
+                  orderID: orderArg.orderId,
+                  ctx: context,
+                ),
+              ),
             );
           },
           backgroundColor: black,
@@ -97,52 +97,41 @@ class OrderStatus extends StatelessWidget {
     );
   }
 
-  Widget rowmaker(String text, Color color) {
-    return Row(
-      children: [
-        Container(
-          decoration: BoxDecoration(shape: BoxShape.circle, color: color),
-          width: khieght * 0.04,
-          height: khieght * 0.015,
-        ),
-        Text(text)
-      ],
-    );
-  }
-
-  Widget verticalline(Color color) {
-    return SizedBox(
-      height: khieght * 0.08,
-      width: kwidth * 0.085,
-      child: VerticalDivider(
-        thickness: kwidth * 0.005,
-        color: color,
-      ),
-    );
-  }
-
-  List<TrackerData> tracker(
-      {required String status,
-      required String? orderdate,
-      required String? shippedDate,
-      required String? outForDeliveryDate,
-      required String? deliveryDate}) {
-    List<String?> dates = [orderdate, shippedDate, outForDeliveryDate, deliveryDate];
-
-    int noOfStage = 0;
-    for (int i = 0; i < 4; i++) {
-      if (status == statusList[i]) {
-        noOfStage = i;
-      }
-    }
+  List<TrackerData> tracker({
+    required String status,
+    required String? orderdate,
+    required String? shippedDate,
+    required String? outForDeliveryDate,
+    required String? deliveryDate,
+  }) {
     List<TrackerData> trackerdata = [];
-    for (int i = 0; i <= noOfStage; i++) {
-      String date = dates[i]!.substring(0, 10);
-      String datetTime = dates[i]!.substring(0, 16);
-      trackerdata.add(TrackerData(title: statusList[i], date: date, tracker_details: [
-        TrackerDetails(title: 'Your ${statusList[i]} on', datetime: datetTime)
-      ]));
+
+    trackerdata.add(trackerMaker(
+        title: 'Order Placed', date: orderdate!, displaytext: 'Your order is placed on'));
+    if (shippedDate != 'Not setted') {
+      trackerdata.add(trackerMaker(
+          title: 'Order Shipped', date: shippedDate!, displaytext: 'Your order is shipped on'));
     }
+    if (outForDeliveryDate != 'Not setted') {
+      trackerdata.add(trackerMaker(
+          title: 'Out For Delivery',
+          date: outForDeliveryDate!,
+          displaytext: 'Your order is out for delivery on'));
+    }
+    if (deliveryDate != 'Not setted') {
+      trackerdata.add(trackerMaker(
+          title: 'Order Delivered',
+          date: deliveryDate!,
+          displaytext: 'Your order is succussfully delivered'));
+    }
+
     return trackerdata;
+  }
+
+  trackerMaker({required String title, required String date, required displaytext}) {
+    return TrackerData(
+        title: title,
+        date: date.substring(0, 10),
+        tracker_details: [TrackerDetails(title: displaytext, datetime: date.substring(0, 16))]);
   }
 }

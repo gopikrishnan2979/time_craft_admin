@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:time_craft_control/controller/banner/banner_adding_controller.dart';
-import 'package:time_craft_control/services/firebase/banner_adding.dart';
+import 'package:time_craft_control/services/firebase/banner_service.dart';
 import 'package:time_craft_control/view/common/widgets/appbar.dart';
 import 'package:time_craft_control/view/common/widgets/loading.dart';
 import 'package:time_craft_control/view/core/styles.dart';
@@ -26,9 +26,14 @@ class Banners extends StatelessWidget {
           body: StreamBuilder(
             stream: firestore.snapshots(),
             builder: (context, snapshot) {
-              if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
+              if (snapshot.data == null) {
                 return const Center(
                   child: Loading(),
+                );
+              }
+              if (snapshot.data!.docs.isEmpty) {
+                return const Center(
+                  child: Text('No items in the Banners'),
                 );
               }
               size = snapshot.data!.docs.length;

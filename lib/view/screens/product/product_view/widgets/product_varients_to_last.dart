@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:time_craft_control/view/core/styles.dart';
 
 class ProductVarientsToLast extends StatelessWidget {
-  const ProductVarientsToLast({super.key,required this.varients});
+  const ProductVarientsToLast({super.key, required this.varients});
   final List varients;
 
   @override
@@ -22,13 +22,9 @@ class ProductVarientsToLast extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => Center(
             child: Container(
-                decoration: BoxDecoration(color: black, borderRadius: BorderRadius.circular(15)),
-                child: Center(
-                  child: Text(
-                    varients[index],
-                    style: interwhite,
-                  ),
-                )),
+              decoration: BoxDecoration(color: black, borderRadius: BorderRadius.circular(15)),
+              child: Center(child: Text(varients[index], style: interwhite)),
+            ),
           ),
           itemCount: varients.length,
         ),
@@ -38,12 +34,12 @@ class ProductVarientsToLast extends StatelessWidget {
   }
 
   Widget _titletext(String text) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      sizedboxwithheight(khieght * 0.01),
-      Text(
-        text,
-        style: inter,
-      )
-    ]);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        sizedboxwithheight(khieght * 0.01),
+        Text(text, style: inter),
+      ],
+    );
   }
 }

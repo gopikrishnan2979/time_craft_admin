@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:time_craft_control/model/argument_models/product_arg.dart';
 import 'package:time_craft_control/view/common/widgets/appbar.dart';
 import 'package:time_craft_control/view/common/widgets/item_card.dart';
-import 'package:time_craft_control/view/common/widgets/loading.dart';
 import 'package:time_craft_control/view/core/styles.dart';
 import 'package:time_craft_control/view/screens/product/add_product/add_product.dart';
 import 'package:time_craft_control/view/screens/brands/all_brands/all_brands.dart';
@@ -37,7 +36,7 @@ class ProductList extends StatelessWidget {
                 : snapshot.data!.docs;
             if (snapshot.data!.docs.isEmpty || data.isEmpty) {
               return const Center(
-                child: Loading(),
+                child: Text('No items added in brand'),
               );
             }
 
@@ -47,7 +46,7 @@ class ProductList extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: kwidth * 0.01,
                 mainAxisSpacing: khieght * 0.003,
-                mainAxisExtent: khieght * 0.31,
+                mainAxisExtent: khieght * 0.33,
               ),
               itemBuilder: (context, index) {
                 return InkWell(
@@ -59,6 +58,7 @@ class ProductList extends StatelessWidget {
                     name: data[index]['name'],
                     imagepath: data[index]['imagelist'][0],
                     smalldiscription: data[index]['smalldiscription'],
+                    productId: data[index].id,
                     discount: data[index]['discount'],
                     price: data[index]['price'],
                   ),

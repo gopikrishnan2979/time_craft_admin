@@ -21,37 +21,20 @@ class ProductNameToDiscription extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          name,
-          style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
+        Text(name, style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold)),
         sizedboxwithheight(khieght * 0.015),
-        Text(
-          smallDiscription,
-          style: GoogleFonts.inter(fontWeight: FontWeight.bold),
-        ),
+        Text(smallDiscription, style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
         sizedboxwithheight(khieght * 0.015),
         Row(
           children: [
-            Text(
-              '$discount% OFF',
-              style: GoogleFonts.inter(fontWeight: FontWeight.bold, color: Colors.green),
-            ),
-            SizedBox(
-              width: kwidth * 0.08,
-            ),
-            Text(
-              '₹$price',
-              style: GoogleFonts.inter(fontWeight: FontWeight.bold),
-            )
+            Text('$discount% OFF',
+                style: GoogleFonts.inter(fontWeight: FontWeight.bold, color: Colors.green)),
+            SizedBox(width: kwidth * 0.08),
+            Text('₹$price', style: GoogleFonts.inter(fontWeight: FontWeight.bold))
           ],
         ),
         _titletext(smallDiscription),
-        Text(
-          discription,
-          style: GoogleFonts.inter(fontSize: 12),
-          textAlign: TextAlign.justify,
-        ),
+        Text(discription, style: GoogleFonts.inter(fontSize: 12), textAlign: TextAlign.justify),
         sizedboxwithheight(khieght * 0.01),
       ],
     );
@@ -62,10 +45,7 @@ class ProductNameToDiscription extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         sizedboxwithheight(khieght * 0.01),
-        Text(
-          text,
-          style: inter,
-        )
+        Text(text, style: inter),
       ],
     );
   }

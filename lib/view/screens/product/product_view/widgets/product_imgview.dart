@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:time_craft_control/view/common/widgets/loading.dart';
 import 'package:time_craft_control/view/core/styles.dart';
 
 class ProductPageview extends StatelessWidget {
@@ -18,6 +18,10 @@ class ProductPageview extends StatelessWidget {
             child: Image.network(
               imagelist[index],
               fit: BoxFit.fitHeight,
+              errorBuilder: (context, error, stackTrace) => const ColoredBox(
+                color: Colors.grey,
+                child: Loading(),
+              ),
             ),
           );
         },

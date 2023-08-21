@@ -12,19 +12,20 @@ class VarientsGrid extends StatelessWidget {
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
+      itemCount: varientAddingController.varients.length,
       padding: EdgeInsets.symmetric(vertical: khieght * 0.01),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: kwidth * 0.03,
-          mainAxisExtent: khieght * 0.045,
-          mainAxisSpacing: khieght * 0.015),
+        crossAxisCount: 3,
+        crossAxisSpacing: kwidth * 0.03,
+        mainAxisExtent: khieght * 0.045,
+        mainAxisSpacing: khieght * 0.015,
+      ),
       itemBuilder: (context, index) => ChoiceChipsMaked(
         label: varientAddingController.varients[index],
         ontap: () {
           varientAddingController.deleteVarient(index);
         },
       ),
-      itemCount: varientAddingController.varients.length,
     );
   }
 }

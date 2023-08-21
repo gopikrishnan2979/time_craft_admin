@@ -12,6 +12,7 @@ class ProductPageview extends StatelessWidget {
       height: khieght * 0.5,
       width: double.infinity,
       child: PageView.builder(
+        itemCount: imagelist.length,
         itemBuilder: (context, index) {
           return SizedBox(
             width: double.infinity,
@@ -25,7 +26,6 @@ class ProductPageview extends StatelessWidget {
             ),
           );
         },
-        itemCount: imagelist.length,
       ),
     );
   }

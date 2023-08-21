@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:time_craft_control/model/product_model.dart';
+import 'package:time_craft_control/view/common/widgets/notification_widgets.dart';
 
 class Validation {
   Validation({required this.product, required this.context});
@@ -9,34 +10,33 @@ class Validation {
     product.price = int.tryParse(product.stringprice);
     product.discount = int.tryParse(product.stringdiscount);
     if (product.imagelist.isEmpty) {
-      alertshower(
-        message: 'Must contain atleast 1 image',
-      );
+      alertshower(text: 'Must contain atleast 1 image', context: context);
       return false;
-    } else if (product.name == '') {
-      alertshower(message: 'Name is invalid');
+    } else if (product.name == '' ||
+        RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(product.name)) {
+      alertshower(text: 'Name is invalid', context: context);
       return false;
     } else if (product.brand == '') {
-      alertshower(message: 'Brand not selected');
+      alertshower(text: 'Brand not selected', context: context);
       return false;
     } else if (product.waterResistantType == '') {
-      alertshower(message: 'Water resistant type not selected');
+      alertshower(context: context, text: 'Water resistant type not selected');
       return false;
     } else if (product.type == '') {
-      alertshower(message: 'Dial type not selected');
+      alertshower(text: 'Dial type not selected', context: context);
       return false;
     } else if (product.price == null || (product.price ?? -1) < 0) {
-      alertshower(message: 'Invalid price');
+      alertshower(text: 'Invalid price', context: context);
       return false;
     } else if (product.discount == null ||
         (product.discount ?? -1) < 0 ||
         (product.discount ?? -1) > 100) {
-      alertshower(message: 'Invalid discount\n(discount should have to be in between 0 to 100)');
+      alertshower(
+          text: 'Invalid discount\n(discount should have to be in between 0 to 100)',
+          context: context);
       return false;
     } else if (product.varients.isEmpty) {
-      alertshower(
-        message: 'Must contain atleast 1 varient',
-      );
+      alertshower(text: 'Must contain atleast 1 varient', context: context);
       return false;
     } else {
       if (product.type == 'Analog') {
@@ -51,43 +51,5 @@ class Validation {
       }
       return true;
     }
-  }
-
-  alertshower({required String message}) {
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Alert'),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  String? emailvalidator(String value) {
-    return value.contains('@') && value.contains('.') && value != '' ? null : 'Enter a valid email';
-  }
-
-  String? passwordvalidator(String value) {
-    if (value == '') {
-      return 'Password cannot be empty';
-    }
-    return value.length > 5 ? null : 'Password must contain minimum 6 characters';
-  }
-
-  String? phonevalidator(String value) {
-    return value.length == 10 ? null : 'Number must contain 10 digits';
-  }
-
-  String? confirmPasswordValidation(String password, String value) {
-    return value == password && value != '' ? null : 'Password must be same as entered above';
   }
 }

@@ -15,9 +15,14 @@ class ProductDeliveryAndDetails extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text('FREE DELIVERY',
-                style: GoogleFonts.inter(
-                    fontSize: 14, fontWeight: FontWeight.bold, color: Colors.green)),
+            Text(
+              'FREE DELIVERY',
+              style: GoogleFonts.inter(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            ),
             const SizedBox(height: 20, child: VerticalDivider(color: Colors.grey)),
             Text('Delivery in 5 days', style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
           ],

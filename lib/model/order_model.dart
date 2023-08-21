@@ -14,26 +14,7 @@ class OrderModel {
   String? outForDeliveryDate;
   String? deliveryDate;
   AddressModel? address;
-  OrderModel({
-    required this.cartlist,
-    required this.paymentId,
-    required this.discription,
-    required this.address,
-    required this.israzorpay,
-    required this.userid,
-    required this.totalPrice,
-    required this.orderStatus,
-    required this.orderPlacedDate,
-  }) {
-    _orderStatusSetter();
-  }
-
-  _orderStatusSetter() {
-    orderPlacedDate ??= 'Not setted';
-    shippingDate ??= 'Not setted';
-    outForDeliveryDate ??= 'Not setted';
-    deliveryDate ??= 'Not setted';
-  }
+  String? phone;
 
   OrderModel.fromMap(var data) {
     totalPrice = data['totalPrice'];
@@ -45,6 +26,7 @@ class OrderModel {
     orderPlacedDate = data['orderPlacedDate'];
     shippingDate = data['shippingDate'];
     outForDeliveryDate = data['outForDeliveryDate'];
+    phone = data['phone'];
     deliveryDate = data['deliveryDate'];
 
     Map cartData = data['items'] as Map;
@@ -54,27 +36,5 @@ class OrderModel {
     }
     Map addressMap = data['address'] as Map;
     address = AddressModel.fromData(data: addressMap);
-  }
-
-  Map<String, dynamic> toMap() {
-    Map cartData = {};
-    for (int i = 0; i < cartlist!.length; i++) {
-      cartData['order$i'] = cartlist![i].toMap();
-    }
-    Map addressMap = address!.toMap();
-    return {
-      'items': cartData,
-      'totalPrice': totalPrice,
-      'orderId': paymentId,
-      'discription': discription,
-      'isRazorpay': israzorpay,
-      'orderStatus': orderStatus,
-      'address': addressMap,
-      'userId': userid,
-      'orderPlacedDate': orderPlacedDate,
-      'shippingDate': shippingDate,
-      'outForDeliveryDate': outForDeliveryDate,
-      'deliveryDate': deliveryDate,
-    };
   }
 }

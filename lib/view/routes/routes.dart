@@ -42,9 +42,13 @@ class RouteProvider {
                   isFromBrand: true,
                 ));
       case AllBrands.routename:
-        return MaterialPageRoute(builder: (context) => const AllBrands());
+        return MaterialPageRoute(
+          builder: (context) => const AllBrands(),
+        );
       case AddBrand.routename:
-        return MaterialPageRoute(builder: (context) => const AddBrand());
+        return MaterialPageRoute(
+          builder: (context) => const AddBrand(),
+        );
       case AddProduct.routename:
         return MaterialPageRoute(
             builder: (context) => MultiProvider(
@@ -57,18 +61,22 @@ class RouteProvider {
       case Orders.routename:
         return MaterialPageRoute(
             builder: (context) => ChangeNotifierProvider(
-                create: (context) => OrderScrnController(), child: const Orders()));
+                  create: (context) => OrderScrnController(),
+                  child: const Orders(),
+                ));
       case OrderStatus.routename:
         return MaterialPageRoute(builder: (context) {
           final arg = routeSettings.arguments as OrderArg;
-          return OrderStatus(
-            orderArg: arg,
-          );
+          return OrderStatus(orderArg: arg);
         });
       case Banners.routename:
-        return MaterialPageRoute(builder: (context) => Banners());
+        return MaterialPageRoute(
+          builder: (context) => Banners(),
+        );
       case AddBanner.routename:
-        return MaterialPageRoute(builder: (context) => const AddBanner());
+        return MaterialPageRoute(
+          builder: (context) => const AddBanner(),
+        );
       case OrderDetails.routename:
         return MaterialPageRoute(builder: (context) {
           final arg = routeSettings.arguments as OrderArg;
@@ -85,12 +93,12 @@ class RouteProvider {
   }
 
   static Route _errorRoute() {
-    return MaterialPageRoute(builder: (ctx) {
-      return const Scaffold(
-        body: Center(
-          child: Text('Something Error'),
-        ),
-      );
-    });
+    return MaterialPageRoute(
+      builder: (ctx) {
+        return const Scaffold(
+          body: Center(child: Text('Something Error')),
+        );
+      },
+    );
   }
 }

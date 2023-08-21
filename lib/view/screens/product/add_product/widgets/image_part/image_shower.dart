@@ -23,14 +23,8 @@ class ImageShower extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          'Add Image',
-                          style: interwhitebold,
-                        ),
-                        const Icon(
-                          Icons.add,
-                          color: white,
-                        ),
+                        Text('Add Image', style: interwhitebold),
+                        const Icon(Icons.add, color: white),
                       ],
                     ),
                   ),
@@ -70,10 +64,7 @@ class ImageShower extends StatelessWidget {
       builder: (context) => AlertDialog(
         title: const Row(
           children: [
-            Icon(
-              Icons.warning,
-              color: Colors.yellow,
-            ),
+            Icon(Icons.warning, color: Colors.yellow),
             Text('Delete'),
           ],
         ),

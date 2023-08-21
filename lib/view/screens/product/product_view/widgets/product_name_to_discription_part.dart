@@ -27,8 +27,10 @@ class ProductNameToDiscription extends StatelessWidget {
         sizedboxwithheight(khieght * 0.015),
         Row(
           children: [
-            Text('$discount% OFF',
-                style: GoogleFonts.inter(fontWeight: FontWeight.bold, color: Colors.green)),
+            Text(
+              '$discount% OFF',
+              style: GoogleFonts.inter(fontWeight: FontWeight.bold, color: Colors.green),
+            ),
             SizedBox(width: kwidth * 0.08),
             Text('₹$price', style: GoogleFonts.inter(fontWeight: FontWeight.bold))
           ],

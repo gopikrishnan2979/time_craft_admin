@@ -4,10 +4,7 @@ import 'package:time_craft_control/view/core/styles.dart';
 
 class AppbarCom extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const AppbarCom({
-    super.key,
-    required this.title,
-  });
+  const AppbarCom({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +15,17 @@ class AppbarCom extends StatelessWidget implements PreferredSizeWidget {
       shadowColor: black,
       leadingWidth: kwidth * 0.13,
       leading: Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(
-              Icons.arrow_back_outlined,
-              size: 25,
-            ),
-          )),
+        padding: const EdgeInsets.only(left: 20),
+        child: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.arrow_back_outlined, size: 25),
+        ),
+      ),
       title: Text(
         title,
-        style: GoogleFonts.inter(
-            color: black, fontSize: 18, fontWeight: FontWeight.bold),
+        style: GoogleFonts.inter(color: black, fontSize: 18, fontWeight: FontWeight.bold),
       ),
     );
   }

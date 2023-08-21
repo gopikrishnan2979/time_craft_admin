@@ -22,9 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Time Craft',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
+      theme: ThemeData(useMaterial3: true),
       initialRoute: SplashScreen.routename,
       onGenerateRoute: RouteProvider.onGenerateRoute,
     );

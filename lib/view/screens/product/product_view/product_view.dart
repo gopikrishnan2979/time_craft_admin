@@ -26,17 +26,19 @@ class ProductView extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: kwidth * 0.08),
                 child: ProductNameToDiscription(
-                    name: productDataO.data['name'],
-                    discount: productDataO.data['discount'],
-                    discription: productDataO.data['discription'],
-                    price: productDataO.data['price'],
-                    smallDiscription: productDataO.data['smalldiscription']),
+                  name: productDataO.data['name'],
+                  discount: productDataO.data['discount'],
+                  discription: productDataO.data['discription'],
+                  price: productDataO.data['price'],
+                  smallDiscription: productDataO.data['smalldiscription'],
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: kwidth * 0.08),
                 child: ProductDeliveryAndDetails(
-                    isAnalog: productDataO.data['isAnalog'],
-                    isWaterResistant: productDataO.data['isWaterResistant']),
+                  isAnalog: productDataO.data['isAnalog'],
+                  isWaterResistant: productDataO.data['isWaterResistant'],
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: kwidth * 0.08),

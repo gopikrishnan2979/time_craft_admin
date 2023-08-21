@@ -29,10 +29,13 @@ class CompleteTabBarView extends StatelessWidget {
       return completeList.isNotEmpty
           ? ListView.separated(
               padding: EdgeInsets.symmetric(horizontal: kwidth * 0.025, vertical: khieght * 0.015),
+              separatorBuilder: (context, index) => sizedboxwithheight(khieght * 0.01),
+              itemCount: completeList.length,
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
                   Navigator.of(context).pushNamed(OrderStatus.routename,
-                      arguments: OrderArg(orderData: completeList[index],orderId: orderIdlist[index]));
+                      arguments:
+                          OrderArg(orderData: completeList[index], orderId: orderIdlist[index]));
                 },
                 child: OrderTile(
                   trailing: Text('Trace', style: interbold),
@@ -46,8 +49,6 @@ class CompleteTabBarView extends StatelessWidget {
                   totalPrice: completeList[index].totalPrice!,
                 ),
               ),
-              separatorBuilder: (context, index) => sizedboxwithheight(khieght * 0.01),
-              itemCount: completeList.length,
             )
           : const Center(child: Text('Currently No Completed Orders'));
     });

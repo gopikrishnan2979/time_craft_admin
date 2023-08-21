@@ -27,14 +27,8 @@ class ImageContainer extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    'Add Image',
-                    style: interwhitebold,
-                  ),
-                  const Icon(
-                    Icons.add,
-                    color: white,
-                  )
+                  Text('Add Image', style: interwhitebold),
+                  const Icon(Icons.add, color: white)
                 ],
               ),
             )
@@ -45,10 +39,7 @@ class ImageContainer extends StatelessWidget {
                   placeholder: (context, url) => const Loading(),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 )
-              : Image.file(
-                  File(imagePath!),
-                  fit: BoxFit.cover,
-                ),
+              : Image.file(File(imagePath!), fit: BoxFit.cover),
     );
   }
 }

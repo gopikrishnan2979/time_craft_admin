@@ -26,14 +26,7 @@ class AppbarOrders extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       bottom: const TabBar(
-        tabs: [
-          Tab(
-            text: 'Active',
-          ),
-          Tab(
-            text: 'Completed',
-          )
-        ],
+        tabs: [Tab(text: 'Active'), Tab(text: 'Completed')],
         labelColor: black,
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorColor: black,
@@ -41,8 +34,7 @@ class AppbarOrders extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Text(
         'ORDERS',
-        style: GoogleFonts.inter(
-            color: black, fontSize: 18, fontWeight: FontWeight.bold),
+        style: GoogleFonts.inter(color: black, fontSize: 18, fontWeight: FontWeight.bold),
       ),
     );
   }

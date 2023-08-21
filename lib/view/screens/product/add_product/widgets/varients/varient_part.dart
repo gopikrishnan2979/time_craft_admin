@@ -32,10 +32,7 @@ class VarientContainer extends StatelessWidget {
                   addVarientPopUp(context);
                 },
                 style: buttonStyle(),
-                child: Text(
-                  'Add Varients',
-                  style: interwhitebold,
-                ),
+                child: Text('Add Varients', style: interwhitebold),
               ),
             ),
           ),
@@ -65,16 +62,11 @@ class VarientContainer extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 String value = _varientTextController.text.trim();
-
                 varientController.addVarient(value);
-
                 Navigator.of(context).pop();
               },
               style: buttonStyle(),
-              child: Text(
-                'Add Varient',
-                style: interwhitebold,
-              ),
+              child: Text('Add Varient', style: interwhitebold),
             )
           ],
         ),

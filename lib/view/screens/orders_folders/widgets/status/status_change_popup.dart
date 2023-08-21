@@ -32,10 +32,7 @@ class StatusChangerPopup extends StatelessWidget {
               iconSize: kwidth * 0.08,
               items: controller.item.map(
                 (String items) {
-                  return DropdownMenuItem(
-                    value: items,
-                    child: Text(items),
-                  );
+                  return DropdownMenuItem(value: items, child: Text(items));
                 },
               ).toList(),
               onChanged: (value) {

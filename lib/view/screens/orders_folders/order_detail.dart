@@ -33,37 +33,38 @@ class OrderDetails extends StatelessWidget {
               SizedBox(
                 height: khieght * 0.578,
                 child: PageView.builder(
-                  itemBuilder: (context, index) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                          height: khieght * 0.4,
-                          width: kwidth * 0.97,
-                          child: Image.network(cartList[index].imageLink!, fit: BoxFit.fitHeight)),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: kwidth * 0.03),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // sizedboxwithheight(khieght * 0.02),
-
-                            sizedboxwithheight(khieght * 0.01),
-                            textinter('Name : ${orderdata.cartlist![index].name}'),
-                            sizedboxwithheight(khieght * 0.01),
-                            textinter('Price : ₹ ${orderdata.cartlist![index].price}'),
-                            sizedboxwithheight(khieght * 0.01),
-                            textinter('Varient : ₹ ${orderdata.cartlist![index].varient}'),
-                            sizedboxwithheight(khieght * 0.01),
-                            textinter('Quantity :  ${orderdata.cartlist![index].quantity}'),
-                            sizedboxwithheight(khieght * 0.01),
-                            textinter(
-                                'Net Worth Total Price : ₹${orderdata.cartlist![index].totalprice}'),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
                   itemCount: cartList!.length,
+                  itemBuilder: (context, index) {
+                    var cartdata = orderdata.cartlist![index];
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                            height: khieght * 0.4,
+                            width: kwidth * 0.97,
+                            child:
+                                Image.network(cartList[index].imageLink!, fit: BoxFit.fitHeight)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: kwidth * 0.03),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              sizedboxwithheight(khieght * 0.01),
+                              textinter('Name : ${cartdata.name}'),
+                              sizedboxwithheight(khieght * 0.01),
+                              textinter('Price : ₹ ${cartdata.price}'),
+                              sizedboxwithheight(khieght * 0.01),
+                              textinter('Varient : ₹ ${cartdata.varient}'),
+                              sizedboxwithheight(khieght * 0.01),
+                              textinter('Quantity :  ${cartdata.quantity}'),
+                              sizedboxwithheight(khieght * 0.01),
+                              textinter('Net Worth Total Price : ₹${cartdata.totalprice}'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
               Padding(
@@ -90,9 +91,7 @@ class OrderDetails extends StatelessWidget {
                           children: [
                             textinter('${orderdata.address!.localAddress},'),
                             textinter('${orderdata.address!.city},${orderdata.address!.district},'),
-                            textinter(
-                              '${orderdata.address!.state},',
-                            ),
+                            textinter('${orderdata.address!.state},'),
                             textinter('Pin:${orderdata.address!.pincode}'),
                             orderdata.address!.landmark != 'no landmark'
                                 ? textinter('landmark:${orderdata.address!.landmark}')
@@ -115,14 +114,15 @@ class OrderDetails extends StatelessWidget {
                             sizedboxwithheight(khieght * 0.01),
                             textinter('Gmail: ${snapshot.data!["email"]}'),
                             sizedboxwithheight(khieght * 0.01),
-                            textinter('phone : ${snapshot.data?["phone"] ?? 'NA'}'),
+                            textinter('phone : ${orderdata.phone}'),
                           ],
                         );
                       },
                     ),
                     sizedboxwithheight(khieght * 0.01),
                     textinter(
-                        orderdata.israzorpay! ? 'Payment Mode: Razorpay' : 'Payment Mode: COD'),
+                      orderdata.israzorpay! ? 'Payment Mode: Razorpay' : 'Payment Mode: COD',
+                    ),
                     sizedboxwithheight(khieght * 0.01),
                     textinter('Payment ID: ${orderdata.paymentId}'),
                     sizedboxwithheight(khieght * 0.01),

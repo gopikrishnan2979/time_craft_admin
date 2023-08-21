@@ -38,6 +38,8 @@ class OrderStatus extends StatelessWidget {
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (ctx, index) => sizedboxwithheight(khieght * 0.01),
+                  itemCount: orderData.cartlist!.length,
                   itemBuilder: (ctx, index) => OrderTile(
                     imagePath: orderData.cartlist![index].imageLink!,
                     name: orderData.cartlist![index].name!,
@@ -45,8 +47,6 @@ class OrderStatus extends StatelessWidget {
                     totalPrice: orderData.cartlist![index].totalprice!,
                     trailing: const SizedBox(),
                   ),
-                  separatorBuilder: (ctx, index) => sizedboxwithheight(khieght * 0.01),
-                  itemCount: orderData.cartlist!.length,
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -88,10 +88,7 @@ class OrderStatus extends StatelessWidget {
             );
           },
           backgroundColor: black,
-          child: const Icon(
-            Icons.add,
-            color: white,
-          ),
+          child: const Icon(Icons.add, color: white),
         ),
       ),
     );
@@ -107,31 +104,38 @@ class OrderStatus extends StatelessWidget {
     List<TrackerData> trackerdata = [];
 
     trackerdata.add(trackerMaker(
-        title: 'Order Placed', date: orderdate!, displaytext: 'Your order is placed on'));
+      title: 'Order Placed',
+      date: orderdate!,
+      displaytext: 'Your order is placed on',
+    ));
     if (shippedDate != 'Not setted') {
       trackerdata.add(trackerMaker(
-          title: 'Order Shipped', date: shippedDate!, displaytext: 'Your order is shipped on'));
+        title: 'Order Shipped',
+        date: shippedDate!,
+        displaytext: 'Your order is shipped on',
+      ));
     }
     if (outForDeliveryDate != 'Not setted') {
       trackerdata.add(trackerMaker(
-          title: 'Out For Delivery',
-          date: outForDeliveryDate!,
-          displaytext: 'Your order is out for delivery on'));
+        title: 'Out For Delivery',
+        date: outForDeliveryDate!,
+        displaytext: 'Your order is out for delivery on',
+      ));
     }
     if (deliveryDate != 'Not setted') {
       trackerdata.add(trackerMaker(
-          title: 'Order Delivered',
-          date: deliveryDate!,
-          displaytext: 'Your order is succussfully delivered'));
+        title: 'Order Delivered',
+        date: deliveryDate!,
+        displaytext: 'Your order is succussfully delivered',
+      ));
     }
 
     return trackerdata;
   }
 
   trackerMaker({required String title, required String date, required displaytext}) {
-    return TrackerData(
-        title: title,
-        date: date.substring(0, 10),
-        tracker_details: [TrackerDetails(title: displaytext, datetime: date.substring(0, 16))]);
+    return TrackerData(title: title, date: date.substring(0, 10), tracker_details: [
+      TrackerDetails(title: displaytext, datetime: date.substring(0, 16)),
+    ]);
   }
 }

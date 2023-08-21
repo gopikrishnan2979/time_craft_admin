@@ -15,6 +15,11 @@ class ImageAddingContainers extends StatelessWidget {
         child: ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
+          separatorBuilder: (context, index) => SizedBox(width: kwidth * 0.05),
+          itemCount: productImagecontroller.imagelist.length > 4
+              ? 5
+              : productImagecontroller.imagelist.length + 1,
+          scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => InkWell(
             onTap: () {
               if (index == productImagecontroller.imagelist.length) {
@@ -27,26 +32,10 @@ class ImageAddingContainers extends StatelessWidget {
               decoration: BoxDecoration(color: Colors.grey, border: Border.all()),
               width: kwidth * 0.115,
               child: index != productImagecontroller.imagelist.length
-                  ? Image.file(
-                      File(productImagecontroller.imagelist[index]),
-                      fit: BoxFit.cover,
-                    )
-                  : Center(
-                      child: Icon(
-                        Icons.add,
-                        color: white,
-                        size: khieght * 0.035,
-                      ),
-                    ),
+                  ? Image.file(File(productImagecontroller.imagelist[index]), fit: BoxFit.cover)
+                  : Center(child: Icon(Icons.add, color: white, size: khieght * 0.035)),
             ),
           ),
-          separatorBuilder: (context, index) => SizedBox(
-            width: kwidth * 0.05,
-          ),
-          itemCount: productImagecontroller.imagelist.length > 4
-              ? 5
-              : productImagecontroller.imagelist.length + 1,
-          scrollDirection: Axis.horizontal,
         ),
       ),
     );

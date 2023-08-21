@@ -68,127 +68,128 @@ class _AddProductState extends State<AddProduct> {
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: kwidth * 0.05),
           child: StreamBuilder(
-              stream: brands.snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.data == null) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+            stream: brands.snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.data == null) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (snapshot.data!.docs.isEmpty) {
+                return Center(
+                  child: Text('No brands were added', style: interbold),
+                );
+              }
+              for (QueryDocumentSnapshot<Object?> brand in snapshot.data!.docs) {
+                if (!brandlist.contains(brand['name'])) {
+                  brandlist.add(brand['name']);
+                  brandDocID[brand['name']] = brand.id;
                 }
-                if (snapshot.data!.docs.isEmpty) {
-                  return Center(
-                    child: Text(
-                      'No brands were added',
-                      style: interbold,
-                    ),
-                  );
-                }
-                for (QueryDocumentSnapshot<Object?> brand in snapshot.data!.docs) {
-                  if (!brandlist.contains(brand['name'])) {
-                    brandlist.add(brand['name']);
-                    brandDocID[brand['name']] = brand.id;
-                  }
-                }
+              }
 
-                return ListView(
-                  children: [
-                    sizedboxwithheight(khieght * 0.04),
-                    Consumer<ProductImageController>(
-                        builder: (context, productImagecontroller, child) {
-                      _productdata.imagelist = productImagecontroller.imagelist;
-                      return Column(
-                        children: [
-                          ImageShower(imageController: productImagecontroller),
-                          sizedboxwithheight(khieght * 0.04),
-                          ImageAddingContainers(
-                            productImagecontroller: productImagecontroller,
-                          ),
-                        ],
+              return ListView(
+                children: [
+                  sizedboxwithheight(khieght * 0.04),
+                  Consumer<ProductImageController>(
+                      builder: (context, productImagecontroller, child) {
+                    _productdata.imagelist = productImagecontroller.imagelist;
+                    return Column(
+                      children: [
+                        ImageShower(imageController: productImagecontroller),
+                        sizedboxwithheight(khieght * 0.04),
+                        ImageAddingContainers(
+                          productImagecontroller: productImagecontroller,
+                        ),
+                      ],
+                    );
+                  }),
+                  sizedboxwithheight(khieght * 0.04),
+                  TextFieldDetails(
+                      discriptionController: _discriptionController,
+                      smallDiscriptionController: _smallDiscriptionController,
+                      nameController: _nameController),
+                  sizedboxwithheight(khieght * 0.02),
+                  Text('Brand', style: interbold),
+                  ChangeNotifierProvider(
+                      create: (context) => DropdownController(item: brandlist, value: brandlist[0]),
+                      child: Consumer<DropdownController>(
+                          builder: (context, DropdownController controller, child) {
+                        _productdata.brand = controller.value == controller.item[0]
+                            ? ''
+                            : brandDocID[controller.value] ?? '';
+                        return DropDownProductAdd(
+                          dropDownController: controller,
+                        );
+                      })),
+                  Text('Details', style: interbold),
+                  ChangeNotifierProvider(
+                    create: (context) => DropdownController(item: typeitem, value: typeitem[0]),
+                    child: Consumer<DropdownController>(
+                        builder: (context, DropdownController controller, child) {
+                      _productdata.type =
+                          controller.value == controller.item[0] ? '' : controller.value;
+                      return DropDownProductAdd(
+                        dropDownController: controller,
                       );
                     }),
-                    sizedboxwithheight(khieght * 0.04),
-                    TextFieldDetails(
-                        discriptionController: _discriptionController,
-                        smallDiscriptionController: _smallDiscriptionController,
-                        nameController: _nameController),
-                    sizedboxwithheight(khieght * 0.02),
-                    Text('Brand', style: interbold),
-                    ChangeNotifierProvider(
-                        create: (context) =>
-                            DropdownController(item: brandlist, value: brandlist[0]),
-                        child: Consumer<DropdownController>(
-                            builder: (context, DropdownController controller, child) {
-                          _productdata.brand = controller.value == controller.item[0]
-                              ? ''
-                              : brandDocID[controller.value] ?? '';
-                          return DropDownProductAdd(
-                            dropDownController: controller,
-                          );
-                        })),
-                    Text('Details', style: interbold),
-                    ChangeNotifierProvider(
-                      create: (context) => DropdownController(item: typeitem, value: typeitem[0]),
-                      child: Consumer<DropdownController>(
-                          builder: (context, DropdownController controller, child) {
-                        _productdata.type =
-                            controller.value == controller.item[0] ? '' : controller.value;
-                        return DropDownProductAdd(
-                          dropDownController: controller,
-                        );
-                      }),
-                    ),
-                    ChangeNotifierProvider(
-                      create: (context) =>
-                          DropdownController(item: waterResistant, value: waterResistant[0]),
-                      child: Consumer<DropdownController>(
-                          builder: (context, DropdownController controller, child) {
-                        _productdata.waterResistantType =
-                            controller.value == controller.item[0] ? '' : controller.value;
-                        return DropDownProductAdd(
-                          dropDownController: controller,
-                        );
-                      }),
-                    ),
-                    ChangeNotifierProvider(
-                      create: (context) => DropdownController(item: gender, value: gender[0]),
-                      child: Consumer<DropdownController>(
-                          builder: (context, DropdownController controller, child) {
+                  ),
+                  ChangeNotifierProvider(
+                    create: (context) =>
+                        DropdownController(item: waterResistant, value: waterResistant[0]),
+                    child: Consumer<DropdownController>(
+                        builder: (context, DropdownController controller, child) {
+                      _productdata.waterResistantType =
+                          controller.value == controller.item[0] ? '' : controller.value;
+                      return DropDownProductAdd(
+                        dropDownController: controller,
+                      );
+                    }),
+                  ),
+                  ChangeNotifierProvider(
+                    create: (context) => DropdownController(item: gender, value: gender[0]),
+                    child: Consumer<DropdownController>(
+                      builder: (context, DropdownController controller, child) {
                         _productdata.gender = controller.value;
                         return DropDownProductAdd(
                           dropDownController: controller,
                         );
-                      }),
+                      },
                     ),
-                    sizedboxwithheight(khieght * 0.02),
-                    TextFieldCom(
-                        label: 'Price',
-                        keyboardtype: TextInputType.number,
-                        controller: _priceController),
-                    sizedboxwithheight(khieght * 0.02),
-                    TextFieldCom(
-                      label: 'Discount in %',
-                      keyboardtype: TextInputType.number,
-                      controller: _discountController,
-                    ),
-                    sizedboxwithheight(khieght * 0.02),
-                    Consumer(builder: (context, VarientAddingController controller, child) {
+                  ),
+                  sizedboxwithheight(khieght * 0.02),
+                  TextFieldCom(
+                    label: 'Price',
+                    keyboardtype: TextInputType.number,
+                    controller: _priceController,
+                  ),
+                  sizedboxwithheight(khieght * 0.02),
+                  TextFieldCom(
+                    label: 'Discount in %',
+                    keyboardtype: TextInputType.number,
+                    controller: _discountController,
+                  ),
+                  sizedboxwithheight(khieght * 0.02),
+                  Consumer(
+                    builder: (context, VarientAddingController controller, child) {
                       _productdata.varients = controller.varients;
-                      return VarientContainer(
-                        varientController: controller,
-                      );
-                    }),
-                    sizedboxwithheight(khieght * 0.02),
-                    addproduct(context),
-                    sizedboxwithheight(khieght * 0.02),
-                  ],
-                );
-              }),
+                      return VarientContainer(varientController: controller);
+                    },
+                  ),
+                  sizedboxwithheight(khieght * 0.02),
+                  addproduct(context),
+                  sizedboxwithheight(khieght * 0.02),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
   }
 
-  Widget addproduct(BuildContext context,) {
+  Widget addproduct(
+    BuildContext context,
+  ) {
     return ElevatedButton(
       onPressed: () {
         _productdata.name = _nameController.text.trim();
@@ -205,14 +206,9 @@ class _AddProductState extends State<AddProduct> {
         minimumSize: MaterialStatePropertyAll(Size(kwidth * 0.9, khieght * 0.06)),
         backgroundColor: const MaterialStatePropertyAll(black),
         foregroundColor: const MaterialStatePropertyAll(white),
-        shape: const MaterialStatePropertyAll(
-          ContinuousRectangleBorder(),
-        ),
+        shape: const MaterialStatePropertyAll(ContinuousRectangleBorder()),
       ),
-      child: Text(
-        'ADD PRODUCT',
-        style: interwhitebold,
-      ),
+      child: Text('ADD PRODUCT', style: interwhitebold),
     );
   }
 }

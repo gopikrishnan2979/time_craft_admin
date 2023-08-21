@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_craft_control/controller/order_scrn_controller.dart';
@@ -29,11 +28,17 @@ class ActiveTabBarView extends StatelessWidget {
         int cartcount = 0;
         return activeList.isNotEmpty
             ? ListView.separated(
-                padding:
-                    EdgeInsets.symmetric(horizontal: kwidth * 0.025, vertical: khieght * 0.015),
+                padding: EdgeInsets.symmetric(
+                  horizontal: kwidth * 0.025,
+                  vertical: khieght * 0.015,
+                ),
+                separatorBuilder: (context, index) => sizedboxwithheight(khieght * 0.01),
+                itemCount: activeList.length,
                 itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    Navigator.of(context).pushNamed(OrderStatus.routename,arguments: OrderArg(orderData: activeList[index],orderId: activeListId[index]));
+                    Navigator.of(context).pushNamed(OrderStatus.routename,
+                        arguments:
+                            OrderArg(orderData: activeList[index], orderId: activeListId[index]));
                   },
                   child: OrderTile(
                     trailing: Text('Trace', style: interbold),
@@ -47,8 +52,6 @@ class ActiveTabBarView extends StatelessWidget {
                     totalPrice: activeList[index].totalPrice!,
                   ),
                 ),
-                separatorBuilder: (context, index) => sizedboxwithheight(khieght * 0.01),
-                itemCount: activeList.length,
               )
             : const Center(child: Text('Currently No Active Orders'));
       },

@@ -16,28 +16,17 @@ class ChoiceChipsMaked extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(left: kwidth * 0.02, top: khieght * 0.01),
-            child: SizedBox(
-              child: Text(
-                label,
-                style: inter,
-              ),
-            ),
+            child: SizedBox(child: Text(label, style: inter)),
           ),
           Positioned(
             right: 0,
             top: khieght * 0.008,
             child: InkWell(
-              onTap:ontap,
+              onTap: ontap,
               child: Container(
                 width: kwidth * 0.1,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: black,
-                ),
-                child: const Icon(
-                  Icons.close,
-                  color: white,
-                ),
+                decoration: const BoxDecoration(shape: BoxShape.circle, color: black),
+                child: const Icon(Icons.close, color: white),
               ),
             ),
           )

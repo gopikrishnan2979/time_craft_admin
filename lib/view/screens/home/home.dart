@@ -18,10 +18,7 @@ class MyHome extends StatelessWidget {
             elevation: 3,
             shadowColor: black,
             surfaceTintColor: white,
-            title: Text(
-              'ADMIN PANEL',
-              style: GoogleFonts.inter(fontWeight: FontWeight.bold),
-            ),
+            title: Text('ADMIN PANEL', style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: kwidth * 0.15),

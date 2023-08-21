@@ -26,7 +26,7 @@ class OrderService {
             .doc(orderId)
             .update({key: date, 'orderStatus': currentStatus}).then((value) {
           Navigator.of(context).pop();
-          Provider.of<OrderScrnController>(context, listen: false).getOrder();
+          Provider.of<OrderScrnController>(context, listen: false).getOrder(context);
         });
       } else {
         if (context.mounted) {

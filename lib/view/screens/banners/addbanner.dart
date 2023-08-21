@@ -12,7 +12,6 @@ class AddBanner extends StatelessWidget {
   static const String routename = '/Addbanner';
   @override
   Widget build(BuildContext context) {
-    
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -51,17 +50,17 @@ class AddBanner extends StatelessWidget {
                         ),
                         backgroundColor: const MaterialStatePropertyAll(black),
                         foregroundColor: const MaterialStatePropertyAll(white),
-                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(kwidth * 0.0225))),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(kwidth * 0.0225),
+                          ),
+                        ),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const Icon(Icons.add),
-                          Text(
-                            'Add Banner',
-                            style: interwhitebold,
-                          ),
+                          Text('Add Banner', style: interwhitebold),
                         ],
                       ),
                     )

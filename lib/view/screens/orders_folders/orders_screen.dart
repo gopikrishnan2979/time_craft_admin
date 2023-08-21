@@ -13,14 +13,17 @@ class Orders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<OrderScrnController>(context, listen: false).getOrder();
+    Provider.of<OrderScrnController>(context, listen: false).getOrder(context);
     return const SafeArea(
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
-            backgroundColor: white,
-            appBar: AppbarOrders(),
-            body: TabBarView(children: [ActiveTabBarView(), CompleteTabBarView()])),
+          backgroundColor: white,
+          appBar: AppbarOrders(),
+          body: TabBarView(
+            children: [ActiveTabBarView(), CompleteTabBarView()],
+          ),
+        ),
       ),
     );
   }

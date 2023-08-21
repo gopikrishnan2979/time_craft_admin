@@ -18,7 +18,10 @@ class TextFieldDetails extends StatelessWidget {
     return Column(
       children: [
         TextFieldCom(
-            label: 'Product Name', keyboardtype: TextInputType.name, controller: nameController),
+          label: 'Product Name',
+          keyboardtype: TextInputType.name,
+          controller: nameController,
+        ),
         sizedboxwithheight(khieght * 0.02),
         TextFieldCom(
             label: 'Small Discription',
@@ -37,15 +40,11 @@ class TextFieldDetails extends StatelessWidget {
             labelStyle: GoogleFonts.inter(color: Colors.grey),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(
-                color: black,
-              ),
+              borderSide: const BorderSide(color: black),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(
-                color: black,
-              ),
+              borderSide: const BorderSide(color: black),
             ),
           ),
         ),

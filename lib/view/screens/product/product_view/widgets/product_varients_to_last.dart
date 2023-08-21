@@ -19,6 +19,7 @@ class ProductVarientsToLast extends StatelessWidget {
               crossAxisSpacing: khieght * 0.005,
               mainAxisSpacing: khieght * 0.005),
           shrinkWrap: true,
+          itemCount: varients.length,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => Center(
             child: Container(
@@ -26,7 +27,6 @@ class ProductVarientsToLast extends StatelessWidget {
               child: Center(child: Text(varients[index], style: interwhite)),
             ),
           ),
-          itemCount: varients.length,
         ),
         sizedboxwithheight(khieght * 0.01),
       ],

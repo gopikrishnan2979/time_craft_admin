@@ -35,9 +35,10 @@ class AllBrands extends StatelessWidget {
             return GridView.builder(
               padding: EdgeInsets.all(kwidth * 0.03),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: kwidth * 0.03,
-                  crossAxisSpacing: kwidth * 0.03),
+                crossAxisCount: 2,
+                mainAxisSpacing: kwidth * 0.03,
+                crossAxisSpacing: kwidth * 0.03,
+              ),
               itemBuilder: (context, index) => Stack(
                 children: [
                   InkWell(
@@ -106,10 +107,7 @@ class AllBrands extends StatelessWidget {
             Navigator.of(context).pushNamed(AddBrand.routename);
           },
           backgroundColor: const Color.fromRGBO(175, 216, 250, 1),
-          child: Icon(
-            Icons.add,
-            size: khieght * 0.04,
-          ),
+          child: Icon(Icons.add, size: khieght * 0.04),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),

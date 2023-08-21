@@ -39,6 +39,7 @@ class Banners extends StatelessWidget {
               size = snapshot.data!.docs.length;
               return ListView.builder(
                 padding: EdgeInsets.symmetric(horizontal: kwidth * 0.09, vertical: khieght * 0.01),
+                itemCount: snapshot.data != null ? snapshot.data!.docs.length : 0,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.symmetric(vertical: khieght * 0.01),
@@ -56,8 +57,10 @@ class Banners extends StatelessWidget {
                             icon: const Icon(Icons.delete),
                             color: black,
                             style: const ButtonStyle(
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Color.fromARGB(196, 255, 255, 255))),
+                              backgroundColor: MaterialStatePropertyAll(
+                                Color.fromARGB(196, 255, 255, 255),
+                              ),
+                            ),
                             onPressed: () {
                               deleteConfirmationAlert(
                                 context: context,
@@ -70,7 +73,6 @@ class Banners extends StatelessWidget {
                     ),
                   );
                 },
-                itemCount: snapshot.data != null ? snapshot.data!.docs.length : 0,
               );
             },
           ),
@@ -131,7 +133,6 @@ class Banners extends StatelessWidget {
           TextButton(
             onPressed: () {
               BannerService().bannerDeleting(bannerUrl);
-
               Navigator.of(context).pop();
             },
             child: Text(

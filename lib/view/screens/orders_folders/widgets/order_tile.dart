@@ -30,14 +30,8 @@ class OrderTile extends StatelessWidget {
           width: kwidth * 0.9,
           child: Row(
             children: [
-              Image.network(
-                imagePath,
-                width: khieght * 0.125,
-                fit: BoxFit.fitHeight,
-              ),
-              SizedBox(
-                width: kwidth * 0.03,
-              ),
+              Image.network(imagePath, width: khieght * 0.125, fit: BoxFit.fitHeight),
+              SizedBox(width: kwidth * 0.03),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,10 +43,7 @@ class OrderTile extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                width: kwidth * 0.15,
-                child: trailing,
-              )
+              SizedBox(width: kwidth * 0.15, child: trailing)
             ],
           ),
         ),
@@ -72,11 +63,6 @@ class OrderTile extends StatelessWidget {
   }
 
   Widget text12inter(String text) {
-    return Text(
-      text,
-      style: GoogleFonts.inter(
-        fontSize: 12,
-      ),
-    );
+    return Text(text, style: GoogleFonts.inter(fontSize: 12));
   }
 }

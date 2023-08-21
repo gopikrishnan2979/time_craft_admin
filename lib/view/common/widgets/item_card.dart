@@ -25,9 +25,7 @@ class ItemCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(kwidth * 0.02),
         color: Colors.white,
-        border: Border.all(
-          color: const Color.fromARGB(255, 200, 200, 200),
-        ),
+        border: Border.all(color: const Color.fromARGB(255, 200, 200, 200)),
       ),
       child: Stack(
         children: [
@@ -49,8 +47,11 @@ class ItemCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(name, style: GoogleFonts.inter(fontSize: 16)),
-                      Text(smalldiscription,
-                          overflow: TextOverflow.ellipsis, style: GoogleFonts.inter(fontSize: 12)),
+                      Text(
+                        smalldiscription,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(fontSize: 12),
+                      ),
                       Row(
                         children: [
                           Text('$discount% OFF', style: GoogleFonts.inter(color: Colors.green)),

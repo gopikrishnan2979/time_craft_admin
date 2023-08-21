@@ -41,7 +41,7 @@ class _AddBrandState extends State<AddBrand> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       InkWell(
-                        onTap: ()  {
+                        onTap: () {
                           brandimagecontroller.addImage();
                         },
                         child: ImageContainer(
@@ -67,22 +67,20 @@ class _AddBrandState extends State<AddBrand> {
                           }
                         },
                         style: ButtonStyle(
-                          fixedSize: MaterialStatePropertyAll(
-                            Size(kwidth * 0.43, khieght * 0.05),
-                          ),
+                          fixedSize: MaterialStatePropertyAll(Size(kwidth * 0.43, khieght * 0.05)),
                           backgroundColor: const MaterialStatePropertyAll(black),
                           foregroundColor: const MaterialStatePropertyAll(white),
-                          shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(kwidth * 0.0225))),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(kwidth * 0.0225),
+                            ),
+                          ),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(Icons.add),
-                            Text(
-                              'Add Brand',
-                              style: interwhitebold,
-                            ),
+                            Text('Add Brand', style: interwhitebold),
                           ],
                         ),
                       )

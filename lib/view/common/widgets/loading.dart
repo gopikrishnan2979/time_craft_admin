@@ -8,10 +8,13 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Center(
-          child: LoadingAnimationWidget.waveDots(
-              color: const Color.fromARGB(255, 9, 198, 255), size: kwidth * 0.13),
-        ));
+      backgroundColor: Colors.transparent,
+      body: Center(
+        child: LoadingAnimationWidget.waveDots(
+          color: const Color.fromARGB(255, 9, 198, 255),
+          size: kwidth * 0.13,
+        ),
+      ),
+    );
   }
 }

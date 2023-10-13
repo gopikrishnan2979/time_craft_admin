@@ -5,6 +5,7 @@ import 'package:time_craft_control/services/firebase/brand_service.dart';
 import 'package:time_craft_control/services/firebase/product_services.dart';
 import 'package:time_craft_control/view/common/widgets/appbar.dart';
 import 'package:time_craft_control/view/common/widgets/loading.dart';
+import 'package:time_craft_control/view/common/widgets/notification_widgets.dart';
 import 'package:time_craft_control/view/core/styles.dart';
 import 'package:time_craft_control/view/screens/brands/add_brands/add_brand.dart';
 import 'package:time_craft_control/view/screens/allproduct_and_brandproduct/product_listing.dart';
@@ -139,9 +140,17 @@ Widget delete(
         child: Text('Cancel', style: interbold),
       ),
       TextButton(
-        onPressed: () {
+        onPressed: () async {
           Navigator.of(context).pop();
-          if (isfromBrand) BrandServices().removeFromBrand(brandId: id, context: context);
+          if (isfromBrand) {
+            loading(context);
+            String? error = await BrandServices().removeFromBrand(brandId: id);
+            if (context.mounted) {
+              if (error == null) {
+                snackBarDesign(text: 'Brand removed succussfully', color: removingColor);
+              }
+            }
+          }
           if (isfromProduct) ProductServices().deleteProduct(context: context, productId: id);
         },
         child: Text(

@@ -4,6 +4,7 @@ import 'package:time_craft_control/controller/brand_image_provider/brand_image_p
 import 'package:time_craft_control/model/brand_model.dart';
 import 'package:time_craft_control/services/firebase/brand_service.dart';
 import 'package:time_craft_control/view/common/widgets/appbar.dart';
+import 'package:time_craft_control/view/common/widgets/notification_widgets.dart';
 import 'package:time_craft_control/view/core/styles.dart';
 import 'package:time_craft_control/view/screens/brands/add_brands/widgets/add_brand_textfield.dart';
 import 'package:time_craft_control/view/screens/brands/add_brands/widgets/image_container.dart';
@@ -60,10 +61,21 @@ class _AddBrandState extends State<AddBrand> {
                             BrandModel branddata = BrandModel(
                                 imagepath: brandimagecontroller.imagePath!,
                                 name: _brandNameController.text.trim());
-                            await BrandServices()
+                            loading(context);
+                            String? error = await BrandServices()
                                 .addToBrandCollection(brandModel: branddata, context: context);
+                            if (context.mounted) {
+                              Navigator.of(context).pop();
+                              if (error == null) {
+                                snackBarDesign(
+                                    text: 'Brand added successfully', color: addingColor);
+                                Navigator.of(context).pop();
+                              } else {
+                                alertshower(text: error, context: context);
+                              }
+                            }
                           } else {
-                            validationAlert(context);
+                            alertshower(text:'Brand name and Image is required',context: context);
                           }
                         },
                         style: ButtonStyle(
@@ -91,23 +103,6 @@ class _AddBrandState extends State<AddBrand> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  validationAlert(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Alert'),
-        content: const Text('Brand name and Image is required'),
-        actions: [
-          TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'))
-        ],
       ),
     );
   }

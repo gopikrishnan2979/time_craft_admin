@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:time_craft_control/controller/brand_image_provider/brand_image_provider.dart';
 import 'package:time_craft_control/services/firebase/banner_service.dart';
 import 'package:time_craft_control/view/common/widgets/appbar.dart';
+import 'package:time_craft_control/view/common/widgets/notification_widgets.dart';
 import 'package:time_craft_control/view/core/styles.dart';
 import 'package:time_craft_control/view/screens/brands/add_brands/widgets/image_container.dart';
 
@@ -40,8 +41,21 @@ class AddBanner extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () async {
                         if (brandimagecontroller.imagePath != null) {
-                          BannerService().addBanner(
-                              context: context, imagepath: brandimagecontroller.imagePath!);
+                          loading(context);
+                          String? error = await BannerService().addBanner(
+                            context: context,
+                            imagepath: brandimagecontroller.imagePath!,
+                          );
+                          if (context.mounted) {
+                            Navigator.of(context).pop();
+                            if (error == null) {
+                              String addedmessage = 'Banner added successfully';
+                              snackBarDesign(text: addedmessage, color: addingColor);
+                              Navigator.of(context).pop();
+                            } else {
+                              alertshower(text: error, context: context);
+                            }
+                          }
                         }
                       },
                       style: ButtonStyle(

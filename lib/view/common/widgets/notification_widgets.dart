@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:time_craft_control/view/common/widgets/loading.dart';
 import 'package:time_craft_control/view/core/styles.dart';
 
 SnackBar snackBarDesign({required String text, Color? color}) {
@@ -20,6 +21,14 @@ SnackBar snackBarDesign({required String text, Color? color}) {
     ),
   );
 }
+
+loading(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Loading(),
+    );
+  }
 
 alertshower({required String? text, required BuildContext context}) {
   showDialog(
